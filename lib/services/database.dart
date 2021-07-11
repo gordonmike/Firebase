@@ -5,7 +5,7 @@ class DatabaseService {
   final String uid;
   DatabaseService({required this.uid});
 
-  final CollectionReference coffeeCollection =
+  final CollectionReference<Map<String,dynamic>> coffeeCollection =
       FirebaseFirestore.instance.collection('coffee');
 
   Future updateUserData(String sugars, String name, int strength) async {
@@ -17,7 +17,7 @@ class DatabaseService {
   }
 
   /// make sure these fields below exists in your database
-  List<Coffee> _coffeeListFromSnapshot(QuerySnapshot snapshot) {
+  List<Coffee> _coffeeListFromSnapshot(QuerySnapshot<Map<String,dynamic>> snapshot) {
     return snapshot.docs.map((doc){
       return Coffee(
         name: doc.data()['name'] ?? '',

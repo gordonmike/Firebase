@@ -16,12 +16,13 @@ class DatabaseService {
     });
   }
 
+  /// make sure these fields below exists in your database
   List<Coffee> _coffeeListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc){
       return Coffee(
-        name: doc.get('name') ?? '',
-        strength: doc.get('strength') ?? 0,
-        sugars: doc.get('sugars') ?? '0'
+        name: doc.data()['name'] ?? '',
+        strength: doc.data()['strength'] ?? 0,
+        sugars: doc.data()['sugars'] ?? '0'
         );
     }).toList();
   }
